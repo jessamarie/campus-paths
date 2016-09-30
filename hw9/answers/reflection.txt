@@ -1,0 +1,7 @@
+1. I think I could have worked more on the meat of the program rather than
+the Gui.
+
+2. Nothing more.
+
+3. Alot! I now have a basic understanding of the GridBagLayout, BufferedImage
+and other interesting classes.

@@ -1,0 +1,21 @@
+1. function subtypes of A.m: (Z->Y->X)
+		- Y m(Object y, Object s);
+
+        X m(X y, String s); //overrides
+        Y m(Object y, Object s); //overloads
+        Object m(X y, String s) throws RuntimeException; //overrides
+        Z m(Y y, String s);  //overloads
+      
+      
+2.1 No, IsoscelesTriangles are expected to have two equal sides, but Triangle violates
+this expectation.
+
+2.2 Human is a true subtype because it has a stronger specification
+that does not surprise the client. However, Squid is not a true subtype because
+a Vertebre is expected to be greater than 0, and Squid violates this expectation.
+
+2.3 Yes, MountainBike is a true subtype because there is nothing in the
+specifications to surprise the client.
+
+2. No, because the specification of an overriding method in ConcurrentAccount 
+requires an Exception and it should not if it is to be a True subtype.

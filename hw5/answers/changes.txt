@@ -1,0 +1,7 @@
+Changes to HW 4:
+
+I added compareTo methods to the end of Vertex and Edges for help with sorting 
+lexicographically.
+
+I added a method to Digraph.java called incidentEdges(Vertex node), in order to
+get a set of outgoing edges of a node.

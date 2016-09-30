@@ -1,0 +1,222 @@
+Problem 1: 
+
+1. { x is divisible by 5 }
+2. { 0 <= x <= 5 }
+3. { x > 0 ∨ y > 0 }
+4. { |x| > w }
+5. { x > w }
+6. { x is an A object }
+
+
+Problem 2:
+
+1. Valid
+2. Invalid. Suppose  x >=1 or y >=0, then z is always z > 0. One way we can solve this issue
+   is by changing the post condition to z > 0, that way we will guarantee that z is positive 
+   since x > y and a the difference of a larger number and a smaller number is always positive.
+3. We know by using chain arguments that Q -> T -> U so it is valid to say that Q -> U. We also
+know that S -> T -> U. Does this mean it is okay to say that say that Q -> S? No here is a 
+counter example:
+{ x >= 2 } //Q -> Assume True
+x = y; 
+{ x >= 2 } S
+x = x*x;
+{ x > - 1} T
+x = x - 1;
+{ x >= -1 }  U
+
+In this case, for example, if x=2 and y= 0, Q is true. However, when the next statement executes we have x = 0 and
+S asserts that x >=2, so S is false. When the next statement executes x = 0 and x > -1, so T is true. When the last 
+statement executes x = -1 and x >= -1, so U is also true. Therefore, the assertion that Q -> S is invalid since T->F is
+invalid, but the rest of the assertions are true.
+
+
+Problem 3:
+1.
+
+{ y > 0 }
+x = 5;
+{ x = 5 }
+y = x + 5;
+{ x = 5 ∧ y = 10 }
+z = -y;
+{ x = 5 ∧  y = 10 ∧ z = -10 }
+x = z / 2;
+{ x = -5 ∧  y = 10 ∧ z = -10 }
+y = 0;
+{ x = -5 ∧  y = 0 ∧ z = -10 }
+
+2.
+
+{ y > x }
+z = z-x;
+{ y > x ∧ z = z-x }
+z = z + 2;
+{ y > x ∧ z = (z-x) + 2 }
+
+3.
+
+{ x*x < 100 }
+x = -x;
+{ x*x < 100 }
+x = x / 2;
+{ x*x < 25 }
+x = x + 5;
+{ x*x < -10x }
+
+4.
+{ y is odd }
+z = y * y;
+{ y is odd ∧  z is odd ∧  z >= 1 }
+w = z mod 4; // x mod y divides x by y and returns the integer remainder. 
+{y is odd ∧  z is odd ∧  z >= 1 ∧  w = z mod 4}
+
+
+Problem 4:
+
+1.{ x <= 0 }
+x = x + 3;
+{ x <= 3 }
+y = 3 * x;
+{ y <= 9 }
+
+
+2.{ y <= 2 }
+x = y - 4;
+{ x + y <= 0 }
+z = x + y;
+{ z <= 0 }
+
+
+3.{ 2x > 2w + 10 }
+y = 2*w + 10;
+{ 2x > y }
+x = 2*x;
+{ x > y }
+
+
+Problem 5:
+
+{ (x > 0) || (x < 0) }
+if (x <= 0)
+    { x != 0}
+    x = x*x;
+    { x != 0}
+else
+    { true }
+    x = x + 1;
+    { x != 0 }
+{x != 0 }
+
+
+Problem 6:
+
+P: { x < 0 }
+if (x == 0)
+{
+    x = x*x; // S1
+} else {
+    x = |2*x|; // S2
+}
+Q: { x is positive ∨ x = 0  }
+
+wp(“if (b), S1 else S2”, Q) = wp(S1, Q) ∧  wp(S2, Q)
+wp(IF, x is positive ∨ x = 0) = wp(x=x*x, x is positive ∨ x = 0 ) ∧ (x = |2*x|, x is positive ∨ x = 0)
+= true ∧ true = true
+
+If x = 1, x is calculated in the x in the else block so that x =|2*x| = |2*1| = 2. Therefore the
+precondition is not satisfied, because x >=0, but the postcondition is still satisfied. This means
+the precondition is not the weakest possible.               
+
+
+
+Problem 7:
+
+1.
+{ x > 1 }
+z = x - 1;
+{ z > 0 }  // <==> 2*z > 0
+w = 2 * z;
+{ w > 0 } // <==> w + 1 > 1
+w = w + 1;
+{w > 1}
+
+This block of code satisfies the weakest precondition.
+
+2.
+{ y >= w }
+w = w/2;
+{ y >= 2*w} // y >= (2*w+2) - 2
+x = 2*w + 2;
+{ y >= x - 2 } // y+2 >= x
+y = y + 2;
+{ y >= x }
+z = y;
+{ z >= x }
+
+This block of code satisfies the weakest precondition
+
+3.
+{ y > 0 }
+if (x == y)
+    {y > -1}
+    x = -1;
+    {x < y}
+else
+    {true}
+    x = y - 1;
+    { x < y }
+{ x < y }
+
+Although this code does not satisfy the weakest precondition, it is sufficient enough to guarantee
+the post condition.
+
+
+Problem 8:
+
+1.
+Loop invariant: i >= 0
+decrementing function: i
+
+2.
+Code:
+	
+	//{ arr != null && arr.Length > 0 } /* Precondition using Dafny syntax */ 
+
+	int i = 0;
+	int z = 0;
+	
+	z = arr[0];
+	i = 1;
+
+    while (arr.length > i)
+    //invariant: i >= arr.length
+    //decrementing function arr.length-i
+    	{
+        if (arr[i] > z) {
+          z = arr[i];
+        }
+        i++;
+    }
+    System.out.println(z);
+
+	//{ forall k :: 0 <= k < arr.Length ==> arr[k] <= z } /* Postcondition using Dafny syntax */
+
+
+invariant: (i <= arr.Length) && (forall k:int :: k >= 0 && k < i ==> z >= arr[k])
+         && (exists k:int :: k >= 0 && k < i && z == arr[k]);
+decrementing function: arr.length-i
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+CampusPathsModel - model
+
+CampusPathsParser - model
+
+Location - model
+
+CampusPathsTextView - view 
+
+CampusPaths - view/controller (main gets info from model and notifies view)
+view: setUpPath(), listAllBuildings()
+controller: main and pathOption()

@@ -1,0 +1,21 @@
+List of all code smells identified:
+
+BooleanExp class:
+	- entire class should be made abstract and divided
+	into parts 
+	- toString() switch statement which is also
+	  duplicate code with the switch statement in
+	ExpressionParser.print(boolean, BoolExp). (They
+	almost do the same thing). This could be solved 
+	with the Strategy/State pattern.
+ 
+ ExpressionParser class:
+   - It might be better if the context class is in it's own file
+   - Too many conditionals
+   - parse(string) method is too long and unreadable
+   - print(boolean, BoolExp)
+      	1. The method is too long
+   		2. switch statements are bad
+   		3. Duplicate switch as mentioned before
+   - unnecessary coupling
+   - evaluate() should be moved to BooleanExp

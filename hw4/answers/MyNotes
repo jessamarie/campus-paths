@@ -1,0 +1,23 @@
+My ScrapNotes:
+
+/*class Iterator {
+	
+	private LinkedList<String> theData;
+	private int next;
+	
+	public Iterator(LinkedList<String> data){
+		theData = data;
+		next = 0;
+		
+	}
+	
+	public boolean hasNext() {
+		return (next < theData.size());
+	}
+	
+	public String next() {
+		return theData.get(next++);
+		
+	}
+}*/
+

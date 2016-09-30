@@ -1,0 +1,8 @@
+1. I have decided that my representation will use an adjacency list. The Digraph
+object will consist of a List that holds the List of edges in the graph and the 
+adjacency list, a Map which uses Vertices as keys and an ArrayList of edges for the value of
+each Vertex. The advantage of using an Adjacency list representation is that it is faster to 
+iterate over all of the edges. The advantage of an adjacency matrix is that it is faster to
+to lookup whether an edge exists, and the an advatage of a Collection is that it is easy to 
+return all of the edges of the set. I chose an adjacency list because I thought it was the right structure given the type of graph
+we had to create.

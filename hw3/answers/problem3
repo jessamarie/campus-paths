@@ -1,0 +1,23 @@
+Precondition: v != 0, u, q and v are non-empty arrays, u is an array of length p.length-v.length
+ 		
+if ( p.length == 0 || (this.isNaN() || p.isNaN()))
+ 	return NaN;
+ 			
+ 	int i = 0;
+ 	q = 0;
+ 	r = this;
+ 		
+ 	i = 0 
+ while ( r.length != 0 && r.degree >= q.degree) {
+ 
+ 	    c = r[i]/p[i];
+ 	    t = new RatPoly(c, r.deg - p.deg);
+ 		q = q + t;
+ 		r = r - (t * p);
+ 			
+ 	i++;
+} 		
+ 		return q;
+ 		
+ 
+Postcondition: u = "q * v + r"                  

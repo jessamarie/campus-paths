@@ -1,0 +1,15 @@
+I decided to first break up my tests into three parts: Vertex Tests,
+ Edge Tests, and and Digraph Tests. This makes it easier to start small,
+ making sure the Vertex and Edge classes work before moving on to the Digraph.
+ For each test case, I worked generally from the top to the bottom of the main 
+ classes, unless there was a more important method to test first. In the DigraphTest,
+ I often tested many elements at once (with inspiration from IntPriorityQueueTest.java),
+ since this ensures that the elements will work well together and it may not have 
+ been as effective if done otherwise. For each method I made sure to test for valid and
+ invalid inputs specified in the specifications 
+ 
+ I did not add any extra test cases because it seemed that my cases
+ were sufficient enough to meet the coverage requirements (and I covered
+ most of the branches).
+ 
+ 

@@ -1,0 +1,39 @@
+1.  // Abstraction Function:
+    // AF(r) IntPriorityQueue heap represents a binary tree in the form of a max heap
+    // heap = [Integer.Max_Value, a_1, a_2,...a_k], where k is the number of
+    // elements in heap and the 0th element equals Integer.Max_Value,
+    // For all nodes i in heap,
+    // r[i] = 1,
+    // r[i/2] = parent of i,
+    // r[2i] = left child of i,
+    // r[2i+1] = right child of i
+    // if size = 0, heap = [Integer.Max_Value]
+    //
+    // Representation Invariant:   
+    // heap[0] = Integer.MAX_VALUE;
+    // heap != null &&
+    // Must be a complete binary tree, 
+    // in other words: # of Left Children >= # of right Children &&
+    // foreach i in heap, 0 < i <= size && heap.get(i) != null  &&
+    // i of Parent < i of children &&
+    // heap.get(i) >= heap.get(2i) for the Left Child &&
+    // heap.get(i) >= heap.get(2i+1) for the Right Child &&
+    // heap.get(2i || 2i + 1) < floor[(i)/2] (parent)
+ 
+2. The code in IntPriorityQueue can lead representation exposure in the class since it is
+essentially mutable. Due to the code in upheap(), insert(), downheap(), and remove()
+the client is able to gain access to the rep due to direct references to it. To avoid this issue
+we can create a copy of the rep on the the way into our out of methods so we are not directly affecting 
+the rep.
+
+3. checkRep method written in class. Inserted calls at the end of constructors, and at
+the beginning and end of remove methods.
+
+4. At the abstract level
+heap = [Integer.MAX_VALUE,4,2,3,2,4] and size = 3 and
+heap = [Integer.MAX_VALUE,4,2,3] and size = 3
+are equivalent
+but
+heap = [Integer.MAX_VALUE,4,3,2] and size = 3 and
+heap = [Integer.MAX_VALUE,5,4,3,3,1] and size = 5
+are equivalent to nothing.

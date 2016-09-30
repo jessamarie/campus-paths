@@ -1,0 +1,6 @@
+1. I could have spent more time researching the mvc pattern in the beginning, so it 
+would not have been so hard for be to come up with a basic design
+
+2. Nothing 
+
+3. I understand the mvc pattern a lot better then before.

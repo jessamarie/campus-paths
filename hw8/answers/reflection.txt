@@ -1,0 +1,4 @@
+1. I could have started the assignment earlier to prevent stress.
+2. Nothing.
+3. I feel like I am just starting to understand more about design patterns by implementing them in code. I wish I
+had more experience with them beforehand.

@@ -1,0 +1,332 @@
+package hw4;
+
+/**
+ * <b>Graph</b> represents a mutable directed labeled graph.
+ * <p>
+ * 
+ * @specfield edgeList : holds list of outgoing edges for each vertex
+ * @specfield adjList : holds an adjacency list for each vertex
+ *
+ */
+
+public class Digraph {
+
+	/** Holds list of digraph edges */
+	private List<Edge> edgeList;
+
+	/** Holds adjacency list for each vertex */
+	private Map<Vertex, ArrayList<Edge>> adjList;
+	
+	 /** A constant enabling the CheckRep method */
+	private final static boolean ENABLE_CHECKREP = false;
+	
+	
+	/**
+	 * @effects Constructs a new empty Digraph
+	 */
+
+	public Digraph() {
+		throw new IllegalArgumentException("Digraph not implemented");
+	}
+
+	/**
+	 * Adds a node to the graph if it is not already in the graph
+	 * 
+	 * @param node the string to be added as a node to the graph
+	 * @modifies this
+	 * @requires node != null
+	 * @effects adds a node to the graph
+	 * @throws IllegalArgumentException
+	 *             if node already exists or is null
+	 * @return The new Vertex object
+	 */
+
+	public Vertex insertNode(String node) {
+		throw new IllegalArgumentException("insertNode not implemented");
+	}
+
+	/**
+	 * Removes a node and it's edges (if the node exists)
+	 * 
+	 * @param node the node to be removed
+	 * @requires node != null
+	 * @modifies nodeList
+	 * @effects removes the node from graph
+	 * @throws IllegalArgumentException
+	 *             if node does not exist or is null
+	 * @return the old Vertex object
+	 */
+
+	public Vertex removeNode(Vertex node) {
+		throw new IllegalArgumentException("removeNode not implemented");
+	}
+
+	/**
+	 * Adds a directed labeled edge to the graph
+	 * 
+	 * @param src the origin (parent) of the edge
+	 * @param dest the destination (child) of the edge
+	 * @param label the label of the edge
+	 * @requires src, dest, label != null
+	 * @modifies this
+	 * @effects adds a directed labeled edge to the graph 
+	 * @throws IllegalArgumentException
+	 *             if src or dest does not exist or are null
+	 * @return the new Edge objects
+	 */
+	public Edge insertEdge(Vertex src, Vertex dest, String label) {
+		throw new IllegalArgumentException("insertEdge not implemented");
+	}
+
+	/**
+	 * Removes a directed labeled edge from the graph
+	 * 
+	 * @param src the origin (parent) of the edge
+	 * @param dest the destination (child) of the edge
+	 * @param label label of the edge
+	 * @requires src, dest, label != null
+	 * @modifies this
+	 * @effects removes a directed labeled edge from the graph 
+	 * @throws IllegalArgumentException
+	 *             if src or dest do not exist or are null
+	 * @return the old Edge object
+	 */
+
+	public Edge removeEdge(Vertex src, Vertex dest, String label) {
+		throw new IllegalArgumentException("removeEdge not implemented");
+	}
+
+	/**
+	 * Returns a list of nodes adjacent to a given node 
+	 * i.e all the children of a given node
+	 * 
+	 * @param node a node in the digraph
+	 * @requires node != null
+	 * @throws IllegalArgumentException
+	 *             if node does not exist or is null
+	 * @return a list of outgoing nodes or an empty list if there are none
+	 */
+
+	public List<Vertex> getAdjacentNodes(Vertex node) {
+		throw new IllegalArgumentException("getAdjacentNodes not implemented");
+	}
+	
+	/**
+	 * Returns a List of nodes in the graph
+	 * 
+	 * @return a list of nodes or an empty list if there are none
+	 */
+
+	public Set<Vertex> getVertices() {
+		throw new IllegalArgumentException("getVertices not implemented");
+	}
+
+	
+	/**
+	 * Returns a list of edges in the graph
+	 * 
+	 * @return a list of edges or an empty list if there are none
+	 */
+	public List<Edge> getEdges() {
+		throw new IllegalArgumentException("getEdges not implemented");
+	}
+
+	/**
+	 * Returns whether the node is in the graph or not
+	 * 
+	 * @param node the node contained in the graph
+	 * @throws IllegalArgumentException
+	 *             if node is null or does not exist
+	 * @return true if element is this and false o.w.
+	 */
+
+	public boolean containsNode(Vertex node) {
+		throw new IllegalArgumentException("containsNode not implemented");
+	}
+
+	/**
+	 * Returns whether the graph is empty or not
+	 * 
+	 * @return true if the graph is empty and false o.w
+	 */
+
+	public boolean isEmpty() {
+		throw new IllegalArgumentException("isEmpty not implemented");
+	}
+
+	/**
+	 * Returns whether two nodes are adjacent so if 
+	 * (src -> dest) means that src is adjacent to dest
+	 * but not vica verca.
+	 * 
+	 * @param src the origin (parent node)
+	 * @param dest the destination (child node)
+	 * @requires src,dest != null
+	 * @throws IllegalArgumentException
+	 *             if src or dest node do not exist or are null
+	 * @return true if src -> dest or false o.w
+	 */
+
+	public boolean areAdjacent(Vertex src, Vertex dest) {
+		throw new IllegalArgumentException("areAdjacent not implemented");
+	}
+
+	/**
+	 * Helper Method to see if node exists in the graph which is commonly needed
+	 * for the throws clause
+	 */
+
+	private void doesNodeExist(Vertex node) {
+		throw new IllegalArgumentException("nodeExists not implemented");
+	}
+
+	/**
+	 * Returns string representation of the graph.
+	 * 
+	 * @return string representation of the graph
+	 */
+	public String toString() {
+		throw new IllegalArgumentException("toString not implemented");
+	}
+	
+    /**
+     * Checks that the representation invariant holds (if any).
+     */
+	
+	private void checkRep() throws RuntimeException{
+		//TODO:
+		
+		throw new RuntimeException("checkRep is not yet implemented");
+	}
+	
+} // End Graph
+
+
+
+package hw4;
+
+public class Vertex {
+    
+	/** Holds the current node */
+   private final String nodeLabel;
+    
+	/**
+	 * @param label the label attached to this vertex
+	 * @throws IllegalArgumentException "null" if vertex is passed in as null
+	 * @effects constructs a new vertex
+	 */
+    
+	public Vertex(String label){
+		throw new RuntimeException("hashcode is not yet implemented");
+	}
+    
+    /**
+     * Returns this vertex' label
+     *
+     * @return label of vertex
+     */
+    
+    public String getLabel(){
+		throw new RuntimeException("getLabel is not yet implemented");
+    }
+	  
+	/**
+	 * A string representation of this object
+	 * 
+	 * @return the label of this vertex
+	 */
+	public String toString() {
+		throw new RuntimeException("toString is not yet implemented");
+	}
+	
+    /**
+     * Standard Hashcode function
+     */
+	public int hashCode() {
+		
+		throw new RuntimeException("hashcode is not yet implemented");
+	}
+	
+	/**
+	 * returns whether two nodes have equal labels
+	 * @return true if the labels are equal
+	 */
+	public boolean equals(Object obj) {
+        
+		throw new RuntimeException("equals is not yet implemented");
+	}
+}
+
+package hw4;
+
+public class Edge {
+	
+	/** Holds src and dest label */
+    public Vertex src, dest;
+    
+    /** Holds current label */
+    public String label;
+
+    /**
+     * @param src the origin node
+     * @param dest the destination node
+     * @param label the edge label
+     * @effects constructs a new edge
+     * @throws IllegalArgumentException "null" if any edge components are passed in as null
+     */
+    public Edge(Vertex src, Vertex dest, String label) {
+    	throw new RuntimeException("Constructor is not yet implemented");
+    }
+    
+    /**
+     * Returns the label of this edge.
+     *
+     * @return the label of this edge
+     */
+    public String getLabel() {
+    	throw new RuntimeException("getLabel is not yet implemented");
+    }
+    
+    /**
+     * Returns the origin vertex (parent)
+     *
+     * @return the parent of this edge
+     */
+    public Vertex getParent() {
+    	throw new RuntimeException("getParent is not yet implemented");
+    }
+    
+    /**
+     * Returns the destination vertex (Child)
+     *
+     * @return the child of this edge
+     */
+    public Vertex getChild() {
+    	throw new RuntimeException("getChild is not yet implemented");
+    }
+
+    /**
+     * Returns a String representation of this object
+     * 
+     * @return String representation of this Edge
+     */
+    public String toString() {
+    	throw new RuntimeException("toString is not yet implemented");
+    }
+    
+    /**
+     * Standard Hashcode function
+     */
+    
+	public int hashCode() {
+		throw new RuntimeException("hashCode is not yet implemented");
+	}
+	
+	/**
+	 * returns whether two Edges are identical
+	 * @return true if the edges are identical
+	 */
+	public boolean equals(Object obj) {
+		throw new RuntimeException("equals is not yet implemented");
+	}
+}

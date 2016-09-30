@@ -1,0 +1,48 @@
+Part 1:
+
+What is wrong with Ball.java?
+
+	There are two things wrong with this class:
+	1. the constructor assigns it's own volume variable to itself. 
+	
+		Solve this problem by changing the constructor contents so that this.volume = volume. This makes it so that the constructor's 
+	volume is assigned to the volume field in the class.
+
+	2. the volume field is not used
+		 This  problem is fixed by changing the return statement in the getVolume() method to return volume; 
+	 that way, the volume field is actually used.
+
+
+Part 2:
+
+Which approach do you think is the better one? Why?
+
+	I think that the second approach is most likely the best choice. Although the first choice is the easiest, it
+would not be very efficient if there were a large number of balls and the loop had to go through them all every time getVolume()
+is called. The second choice is more efficient because it adds the volumes as the balls are added and removed and also keeps
+track of the volume without having to recalculate.
+
+
+Part 3:
+
+1. There are many ways to implement getBallsFromSmallest(). Briefly describe at least two different ways. 
+
+	1a. One way to implement getBallsFromSmallest() is to use create an unsorted and sorted list using LinkedHashSet and
+iterating through the unsorted list (after adding the contents of ballContainer to it) using a minimum element counter 
+and while loop. If the volume of the next element in the list is smaller than it gets assigned to the counter and 
+added to the sorted list until the end of the set is reached. Finally, you return the sorted list. This is the method that I used.
+
+	1b. Another method is to use a TreeSet and an inner Comparator class. You can iterate through the
+balls by creating a Ball TreeSet and adding a new comparator as the argument. The Comparator class contents will use the compare method
+to return the smallest volume. Back in the getBallsFromSmallest() method we can use the iterator to add that volume to the set.
+
+2. Which of the above ways do you think is the best? Why
+
+The second method is probably the best way to implement getBallsFromSmallest() because it provides a better method to 
+sort the elements in a collection. It also requires much less complicated code to implement.
+
+
+
+
+
+

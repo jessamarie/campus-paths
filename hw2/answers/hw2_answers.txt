@@ -1,0 +1,258 @@
+Problem 1:
+
+New code:
+
+int sum = 0
+int i = -1;
+while (i + 1 < len)
+{
+    sum += arr[i+1];
+    i = i + 1;
+ }
+ 
+Invariant: i <= len && sum = arr[0]+...+arr[i]
+Decrementing function: len - i
+
+1. We know that i = -1 and sum = 0. So:
+ i <= len and sum = arr[0]+...+arr[i] holds before the loop
+
+2. Assume i <= n sum = arr[0]+...+arr[i] holds after the k-th iteration.
+Then:
+sum_new = sum + arr[i+1];
+i_new = i + 1;
+
+Thus, sum = arr[0]+...+arr[i] holds after the (k + 1)^st iteration.
+i <= n also holds
+
+3. ~(i < n) -> i >=n and 
+i <=n ∧ sum = arr[0]+...+arr[i] -> 
+sum = arr[0]+...+arr[len-1] and arr.length = len
+Therefore sum = arr[0]+...+arr[arr.length-1]
+
+This code was a bit harder to implement and prove because in addition
+to changing i, you have to change the rest of the code to make it work. 
+It seems that the older code was much more efficient in terms of 
+implementation (easier to read, etc). To be sure you don't reach an 
+out of bounds index, you must be sure the code terminated before it 
+reaches i + 1.
+
+ 
+Problem 2: 
+Proposed Invariant: y >= 0 && result*power(x,y) = power(m,n)
+	Decrementing  : y 
+	
+1. Just before the loop: result = 1, x = m, y = n, and y >= 0.
+
+result*power(x,y) = 1*power(x,y) = power(m,n)
+y >= 0 because n>=0 and y=n
+
+The base case holds.
+
+2. Assume result*power(x,y) = power(m,n) holds after the k-th
+iteration. Then we must show it holds for the (k + 1)st iteration. We
+have 2 cases:
+
+	I. y is even.
+	Therefore y = 2k
+	result_new = result;		m_new = m;
+	x_new = x*x;				n_new = n;
+	y_new = y/2 = (2k)/2 = k
+	
+	result_new*power(x_new,y_new) = result*power(x*x,k)
+   =result*power(x,2k) = result*power(x,y) = power(m,n)
+   =power(m_new,n_new)
+   
+   y >=0 ->  2k >=0  ->  f >=0  ->  y_new >=0
+   
+   Therefore this case holds
+   
+   II. y is odd
+   Therefore y = 2k + 1;
+   result_new = result * x;		m_new = m;
+   x_new = x;					n_new = n;
+   y_new = y - 1 = (2k + 1) - 1 = 2k
+   
+    result_new*power(x_new,y_new)= result*x*power(x,2k)
+   =result*power(x,y) = power(m,n) = power(m_new,n_new)
+   
+   y >=0 -> y_new >=0
+   
+   Therfore this case also holds.
+   
+ 3. When the loop terminates, y = 0.
+ result*power(x,y) = power(m,n) -> m^n
+ Therefore result*power(x,y) = power(m,n) holds.
+ 
+ 4. y is our proposed decreasing function. We have 2 cases:
+ 
+ 	I. y is even. y = 2k, 
+ 		y_new = y/2 = 2k/2 = k, where k < y (until y reaches 0)
+ 	II. y is odd. y = 2k + 1
+ 		y_new = y-1 = 2k + 1 - 1 = 2k where 2k < y (until y reaches 0)
+ 		
+ 		Therefore the program will terminate.
+ 		
+The proposed invariant and decrementing function are therefore valid.
+
+
+Problem 3:
+
+function Factorial(n: int): int
+  requires n >= 0
+{
+  if n == 0 then 1 else n * Factorial(n-1)
+}
+
+method LoopyFactorial(n: int) returns (u: int)
+  requires n >= 0
+  ensures u == Factorial(n)
+  {
+    u := 1;
+    var r := 0;
+    while (r < n) 
+      invariant r <= n;
+      invariant u == Factorial(r);
+    {
+      var v := u;
+      var s := 1;
+      while (s<=r) 
+       invariant u == Factorial(r)*s && s <= (r + 1);
+      {
+        u:=u+v;
+        s:=s+1;
+      }
+      assert u == Factorial(r+1);
+      r:=r+1;
+    }
+  }
+  
+  Proof of partial correctness
+  Outer loop:
+  1. Base case: 
+  Loop 1: We know that n >= 0, u = 1 and r = 0 before the loop. r <= n
+  holds and u = 1 = r! = 0! = 1. Therfore the cases holds.
+  
+  2. Assume that r <= n && u == Factorial(r) hold after the k-th iteration. 
+  Then: v_new = u, S_new = 1, and r_new = r + 1, and u_new = u
+  
+  u_new = Factorial(r_new) 
+  u = Factorial(r+1)
+  
+  3. ~(r <= n -> r > n) and u == Factorial(r) -> u == Factorial(n)
+  
+  Therefore the first invariant holds for the (k + 1)st iteration.
+  
+  Inner Loop:
+  1. Base case: We know that v = u, s = 1 before the loop
+  In this case s = 1 and r = 0. There for the loop is not entered.
+  
+  2. Assume that invariant u == Factorial(r)*s holds after the k-th iteration.
+  Then: u_new = v + u, s_new = s + 1, r_new = r + 1, v_new = u
+  
+  u_new = Factorial(r_new)*s_new
+  u + v = Factorial(r+1)*(s+1)
+  
+  3. ~(s <= (r + 1)) -> s > r + 1 and u == Factorial(r)*s -> u == Factorial(n)
+  Therefore the invariant holds.
+  
+
+
+Problem 4:
+ 1.
+ Precondition: p and q are non-empty arrays, r is an array of length max(p.length, q.length)
+  d = 0;
+  
+  for(int i = 0; i < q.length; i++)
+  	q[i] = q[i]*-1;
+  	
+  while ( d != max(p.length, q.length) )
+    if (d < p.length && d < q.length) { 
+      r[d]=p[d]+q[d];
+    }
+    else if (d < p.length) { 
+      r[d] = p[d];
+    }
+    else {
+      r[d] = q[d];
+    } 
+    d = d+1;
+  Postcondition: r[i] = (p-q)[i] for each 0 ≤ i < result.length
+  
+Partial correctness. Let (p-q)[i] be the coefficient of the term of power i in the desired difference of p and q. 
+A suitable loop invariant is Inv = result[i] = (p-q)[i], for each i such that 0 ≤ i < d 
+
+1) Inv trivially holds at start of loop, as there is no i such that 0 ≤ i < -1 
+2) Assuming Inv holds at the end of k-th iteration, we must show it holds after (k+1)-st iteration: After k-th iteration 
+   we have the sum up to power d-1. The loop body adds the term for power d and increments d by 1. Thus, we have the 
+   difference up to power d_new-1.
+3) We must show that the loop exit condition and the loop invariant imply the postcondition. d = max(p.length, q.length) 
+        ∧ result[i] = (p-q)[i], for 0 ≤ i < d implies result[i] = (p-q)[i], for 0 ≤ i < result.length 
+Termination. Define decrementing function D = max(p.length, q.length)-d. It clearly decreases at each iteration, and also, D=0 implies the loop exit condition 
+			 d=max(p.length, q.length).
+
+  
+2. Precondition: p and q are non-empty arrays, r is an array of length p.length, s is an array of length q.length
+        for(int i = 0; i < p.length; i++) {
+                for(int j = 0; j < q.length; j++) {
+                        s[j] = p[i]*q[j];
+                }
+                r[i] = s;
+        }
+        d = r[0];
+        for(int i = 1; i < r.length; i++)
+                for(int j = 0; j < r[i].length; j++)
+                        d[j] = d[j]+r[i][j]
+        Postcondition: d = p*q  for each 0 ≤ i < result.length
+        
+Partial correctness. Let (p*q)[i] be the coefficient of the term of power i in the desired multiplication of p and q. 
+A suitable loop invariant is Inv = result[i] = (p*q)[i], for each i such that 0 ≤ i < d 
+1) Inv trivially holds at start of loop, as there is no i such that 0 ≤ i < -1 
+2) Assuming Inv holds at the end of k-th iteration, we must show it holds after (k+1)-st iteration: After k-th iteration
+   we have multiplication up to the power power d-1. The loop body adds the term for power d and increments d by 1. Thus, we have the sum up to power dnew-1, as needed. 
+3) We must show that the loop exit condition and the loop invariant imply the postcondition. 
+   d = max(p.length, q.length) ∧ result[i] = (p*q)[i], for 0 ≤ i < d implies result[i] = (p+q)[i], for 0 ≤ i < result.length 
+Termination. Define decrementing function D = max(p.length, q.length)-d. It clearly decreases at each iteration, and also, D=0 
+             implies the loop exit condition d=max(p.length, q.length). 
+
+ 
+3.   
+  Precondition: p and q are non-empty arrays, r is an array of length max(p.length, q.length), x is given
+  d = 0;
+  r = 0
+  
+  /* Consider Better implementation possibly using for loop
+  */
+  
+  while ( d != p.length) {
+  	if(d == 0)
+	{
+		r = x*p[d] + p[d+1];
+	}else{
+		r = v*x + p[d+1];
+	}
+	d = d+1;
+}
+  Postcondition: r = [i]x^i+...+[p.length-1]x^p.length-1 for each 0 ≤ i < result.length
+  
+  Partial correctness. Let (d)[i] be the polynomial evaluated.
+  A suitable loop invariant is Inv = r = [i]x^i+...+[p.length-1]x^p.length-1], for each i such that 0 ≤ i < d 
+  
+  Proof of Correctness:
+  1) invariant holds at start of the loop because there is no i such that 0 ≤ i < -1
+  2) Assuming invariant holds at the end of k-th iteration, we must show it holds after (k+1)-st iteration:
+     After k-th iteration we have the evaluation up to power i. power i is then evaluated by the loop body by
+     multiplying the result of the last term's evaluation and adding the coefficient to the following term.
+     It increments i and goes to the next term. Thus, we have the evaluation up to power i(new)-1, as needed.
+  3) We must show that the loop exit condition and the loop invariant imply the postcondition. d = p.length && 
+  	 r = [i]x^i+...+[p.length-1]x^p.length-1 for 0 ≤ i < d implies r = [i]x^i+...+[p.length-1]x^p.length-1 
+  	 for 0 ≤ i < p.length
+  Termination. Define decrementing function: D = p.length - d. It decreases at each iteration and D=0 implies 
+  the exit condition d = p.length.
+  
+
+
+  
+  
+
+ 
+ 

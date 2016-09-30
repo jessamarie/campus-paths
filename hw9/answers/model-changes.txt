@@ -1,0 +1,7 @@
+model-changes:
+
+- Changed return type of getBuildings() to String[] for more efficient 
+use across all controllers (specifically to get data for JList)
+
+- Added getX and getY method to easily get coordinates and to prevent 
+coupling with Location class.

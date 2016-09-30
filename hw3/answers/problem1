@@ -1,0 +1,55 @@
+1. creator, observer, producer:
+
+Creators:
+public RatNum(int n) 
+public RatNum(int n, int d)
+
+Observers:
+public boolean isNaN()
+public boolean isNegative()
+public boolean isPositive()
+public int compareTo(RatNum rn)
+public boolean equals(/*@Nullable*/ Object obj)
+public static RatNum valueOf(String ratStr)
+
+Producers:
+public RatNum negate()
+public RatNum add(RatNum arg)
+public RatNum sub(RatNum arg)
+public RatNum mul(RatNum arg)
+public RatNum div(RatNum arg)
+public double doubleValue() 
+public int intValue() 
+public float floatValue() 
+public long longValue(
+public int hashCode()
+public String toString()
+
+
+
+2. The point of these one-line comments to explain what the return statement is returning.
+
+3. If arg is null it will throw an exception when the arithmetic methods are is called. Since this would happen before the other methods
+are even called, the requirement is not needed. 
+
+
+4. The div method must divide by a NaN, which is not allowed. The mul and add methods do not need to check for NaN because the denominator 
+is calculated as a result of multiplication of the numerator and denominator as separate elements.
+
+
+5. RatNum.valueOf(String) is static because it does not use member variables.
+  
+   What alternative to static methods would allow one to accomplish the same goal of generating a RatNum from an input String?
+   New constructor with string?
+
+
+6. Constructor with 2 variables will need to remove gcd implementation. CheckRep will not check if the terms are simplified. Removing
+gcd from these methods will make them more efficient. In order for the specifications to still be satisfied we need to use the gcd method inside the 
+methods they are needed. Adding gcd to these will make these methods will make them less efficient.
+   
+
+7. Since the specification does not have a modifies clause, you cannot modify this. Furthermore, you cannot mutate this because according to the class
+specification, RatNum is immutable.
+
+8. The RatNum class specifications classify it as immutable, therefore there can be no mutators and the member variables of RatNum are final. The methods
+will never modify the original objects. So, there is no need to checkRep at the beginning of a constructor (a creator).

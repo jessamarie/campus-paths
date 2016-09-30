@@ -1,0 +1,17 @@
+1. Why did Fibonacci fail the testThrowsIllegalArgumentException test? What did you have to do to fix it? 
+
+The program failed the testThrowsIllegalArgumentException test because it was throwing the exception for 0 when it 
+is not supposed to throw for zero or for a positive number. To solve the problem, you have to change the first if statement 
+from n <= 0 to n < 0. This guarantees that 0 cannot come up as a test value for that case.
+
+2. Why did Fibonacci fail the testBaseCase test? What (if anything) did you have to do to fix it? 
+
+The program failed the testBaseCase because it came up as 0 is negative when in fact 0 is not negative.
+This was also solved when the first if statement was changed from n=>0 to n>0 for the same reason.
+
+3. Why did Fibonacci fail the testInductiveCase test? What (if anything) did you have to do to fix it? 
+
+getFibTerm() was expected to be 2 but was 1. To solve this problem, you must change two parts of the code. First,
+change the second if statement from  n <= 2 to n < 2. Then, you must change the recursive operation from subtraction to addition. 
+This solves the failure.
+

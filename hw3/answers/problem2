@@ -1,0 +1,13 @@
+1.  Advantages: Access to every element in the array using indexes. This also gives the array implementation
+	the advantage of being faster.
+
+	Disadvantages: A  list is easier to add and remove elements from and the size will
+	automatically adjust. Array sizes are fixed.  It is harder to insert an elements in
+	the middle of an array.
+	
+2. I included calls to checkRep() at the beginning and all methods, but isNaN(), degree(), 
+since they are just returning values. This ensures that the Rep invariant was satisfied 
+before the code and after the code of the method. I only included constructors at the 
+end because since it's creating coeffs there is no need to check it's values. I did not checkRep() for the methods 
+
+3. 
